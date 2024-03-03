@@ -15,14 +15,14 @@ return {
 		dependencies = 'nvim-tree/nvim-web-devicons',
 		config = function()
 			-- setup defaults
-			require('bufferline').setup()
+			require('bufferline').setup({
+				options = {
+					mode = "tabs",
+					separator_style = "slope",
+					buffer_close_icon = ' ',
+				},
+			})
 		end,
-		opts = {
-			options = {
-				mode = "tabs",
-				separator_style = "slant",
-			},
-		},
 	},
 
 	{
@@ -30,7 +30,11 @@ return {
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
 			-- setup defaults
-			require('lualine').setup()
+			require('lualine').setup({
+				options = {
+					theme = 'darkplus'
+				}
+			})
 		end,
 	},
 

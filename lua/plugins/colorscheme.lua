@@ -1,14 +1,28 @@
---  -- the colorscheme should be available when starting Neovim
 return {
+	-- {
+	-- 	'kepano/flexoki-neovim',
+	-- 	-- don't use name flexoki-neovim
+	-- 	name = 'flexoki',
+	-- 	priority = 1000,
+	-- },
 	{
-		'kepano/flexoki-neovim',
-		name = 'flexoki',
+		"lunarvim/darkplus.nvim",
+		name = "darkplus",
 		priority = 1000,
 		config = function()
-			vim.cmd([[colorscheme flexoki-dark]])
+			vim.cmd([[colorscheme darkplus]])
 		end
-	}
-
+	},
+	-- {
+	-- 	'sainnhe/sonokai',
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.g.sonokai_style = 'maia'
+	-- 		vim.g.sonokai_better_performance = 1
+	--
+	-- 		vim.cmd([[colorscheme sonokai]])
+	-- 	end
+	-- },
 	-- {
 	--   "bluz71/vim-nightfly-guicolors",
 	--   priority = 1000, -- make sure to load this before all the other start plugins
