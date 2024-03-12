@@ -124,12 +124,16 @@ vim.o.listchars = add {
 
 vim.o.emoji = false
 
+local TAB_WIDTH = 4
+
 vim.opt.wrap = true
-vim.opt.wrapmargin = 4
-vim.opt.softtabstop = 4
-vim.opt.textwidth = 100
-vim.opt.shiftwidth = 4
+
+vim.opt.shiftwidth = TAB_WIDTH
+vim.opt.softtabstop = TAB_WIDTH
+vim.opt.tabstop = TAB_WIDTH
 vim.opt.expandtab = true
+
+vim.opt.textwidth = 100
 vim.opt.smarttab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
