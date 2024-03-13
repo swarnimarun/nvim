@@ -17,7 +17,6 @@ return {
             -- setup defaults
             require('bufferline').setup({
                 options = {
-                    mode = "tabs",
                     separator_style = "slope",
                     buffer_close_icon = ' ',
                 },

@@ -7,16 +7,10 @@ return {
             { "antosha417/nvim-lsp-file-operations", config = true },
         },
         config = function()
-            -- import lspconfig plugin
-            local lspconfig = require("lspconfig")
+            local on_attach = function(client, bufnr)
+                local keymap = vim.keymap -- for conciseness
 
-            -- import cmp-nvim-lsp plugin
-            local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-            local keymap = vim.keymap -- for conciseness
-
-            local opts = { noremap = true, silent = true }
-            local on_attach = function(_client, bufnr)
+                local opts = { noremap = true, silent = true }
                 -- set keybinds for the entire buffer
                 opts.buffer = bufnr
                 vim.lsp.inlay_hint.enable(bufnr, true)
@@ -77,18 +71,24 @@ return {
 
                 opts.desc = "Restart LSP"
                 keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+                -- Change the Diagnostic symbols in the sign column (gutter)
+                -- (not in youtube nvim video)
+                local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+                for type, icon in pairs(signs) do
+                    local hl = "DiagnosticSign" .. type
+                    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+                end
             end
+
+            -- import cmp-nvim-lsp plugin
+            local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
             -- used to enable autocompletion (assign to every lsp server config)
             local capabilities = cmp_nvim_lsp.default_capabilities()
 
-            -- Change the Diagnostic symbols in the sign column (gutter)
-            -- (not in youtube nvim video)
-            local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-            end
+            -- import lspconfig plugin
+            local lspconfig = require("lspconfig")
 
             -- configure html server
             lspconfig["html"].setup({
@@ -169,6 +169,39 @@ return {
                 filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
             })
 
+            -- configure omnisharp server
+            lspconfig["omnisharp"].setup({
+                cmd = { "dotnet", "/Users/swarnimarun/.cache/omnisharp-vim/omnisharp-roslyn/OmniSharp.dll" },
+                capabilities = capabilities,
+                on_attach = on_attach,
+                settings = {
+                    FormattingOptions = {
+                        enableEditorConfigSupport = true,
+                        newLine = "\n",
+                        useTabs = false,
+                        tabSize = 4,
+                        indentationSize = 4,
+
+                        NewLinesForBracesInTypes = false,
+                        NewLinesForBracesInMethods = false,
+                        NewLinesForBracesInProperties = false,
+                        NewLinesForBracesInAccessors = false,
+                        NewLinesForBracesInAnonymousMethods = false,
+                        NewLinesForBracesInControlBlocks = false,
+                        NewLinesForBracesInAnonymousTypes = false,
+                        NewLinesForBracesInObjectCollectionArrayInitializers = false,
+                        NewLinesForBracesInLambdaExpressionBody = false,
+
+                        NewLineForElse = false,
+                        NewLineForCatch = false,
+                        NewLineForFinally = false,
+                        NewLineForMembersInObjectInit = false,
+                        NewLineForMembersInAnonymousTypes = false,
+                        NewLineForClausesInQuery = false,
+                    },
+                }
+            })
+
             -- configure python server
             lspconfig["pyright"].setup({
                 capabilities = capabilities,
@@ -185,6 +218,17 @@ return {
             lspconfig["gopls"].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
+                settings = { -- custom settings for lua
+                    hints = {
+                        assignVariableTypes = true,
+                        compositeLiteralFields = true,
+                        compositeLiteralTypes = true,
+                        constantValues = true,
+                        functionTypeParameters = true,
+                        parameterNames = true,
+                        rangeVariableTypes = true,
+                    }
+                },
             })
 
             -- configure astro server
@@ -251,10 +295,12 @@ return {
             }
         end
     },
+    { 'b0o/SchemaStore.nvim', version = false },
     {
         "pmizio/typescript-tools.nvim",
         name = "typescript-tools",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        event = { 'BufReadPost *.ts,*.tsx,*.js,*.jsx', 'BufNewFile *.ts,*.tsx,*.js,*.jsx' },
         opts = {},
         config = function()
             require("typescript-tools").setup({
@@ -268,9 +314,13 @@ return {
                         includeInlayFunctionLikeReturnTypeHints = true,
                     },
                 },
+                on_attach = function(_, bufnr)
+                    vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#6272A4', italic = true })
+                    vim.lsp.inlay_hint.enable(bufnr, true)
+                end,
             })
         end
     },
     'ionide/Ionide-vim',
-    'p00f/clangd_extensions.nvim'
+    'p00f/clangd_extensions.nvim',
 }
