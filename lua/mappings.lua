@@ -22,9 +22,9 @@ map("n", "<leader>rn", "<cmd>set rnu!<CR>", { desc = "Toggle Relative number" })
 map("n", "<leader>ch", "<cmd>NvCheatsheet<CR>", { desc = "Toggle NvCheatsheet" })
 
 -- global lsp mappings
-map("n", "<leader>fM", function()
-    vim.lsp.buf.format({ async = true })
-end, { desc = "Lsp formatting" })
+-- map("n", "<leader>fM", function()
+--     vim.lsp.buf.format({ async = true })
+-- end, { desc = "Lsp formatting" })
 
 map("n", "<leader>lf", vim.diagnostic.open_float, { desc = "Lsp floating diagnostics" })
 map("n", "[d", vim.diagnostic.goto_prev, { desc = "Lsp prev diagnostic" })
@@ -45,23 +45,6 @@ end, { desc = "Buffer Goto prev" })
 map("n", "<leader>x", function()
     require("nvchad.tabufline").close_buffer()
 end, { desc = "Buffer Close" })
-
--- Comment
--- map("n", "<leader>/", function()
---     require("Comment.api").toggle.linewise.current()
--- end, { desc = "Comment Toggle" })
-
-map("n", "<C-c>", function()
-    require("Comment.api").toggle.linewise.current()
-end, { desc = "Comment Toggle" })
-
--- map("v", "<leader>/", function()
---     require("Comment.api").toggle.linewise(vim.fn.visualmode())
--- end, { desc = "Comment Toggle" })
-
-map("v", "<C-c>", function()
-    require("Comment.api").toggle.linewise(vim.fn.visualmode())
-end, { desc = "Comment Toggle" })
 
 -- telescope
 -- map("n", "<leader>fg", "<cmd>Telescope live_grep<CR>", { desc = "Telescope Live grep" })
