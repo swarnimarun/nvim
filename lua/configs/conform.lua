@@ -16,7 +16,6 @@ local options = {
         rust = { "rustfmt" },
         go = { "gofmt" },
         zig = { "zigfmt" },
-        csharp = { "csharpier" },
         cmake = { "cmake_format" },
         cpp = { "clang_format" },
         c = { "clang_format" },

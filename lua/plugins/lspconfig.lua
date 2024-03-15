@@ -192,35 +192,9 @@ return {
 
         -- configure omnisharp server
         lspconfig["omnisharp"].setup({
-            cmd = { "dotnet", "/Users/swarnimarun/.cache/omnisharp-vim/omnisharp-roslyn/OmniSharp.dll" },
+            cmd = { "Omnisharp" },
             capabilities = capabilities,
             on_attach = on_attach,
-            settings = {
-                FormattingOptions = {
-                    enableEditorConfigSupport = true,
-                    newLine = "\n",
-                    useTabs = false,
-                    tabSize = 4,
-                    indentationSize = 4,
-
-                    NewLinesForBracesInTypes = false,
-                    NewLinesForBracesInMethods = false,
-                    NewLinesForBracesInProperties = false,
-                    NewLinesForBracesInAccessors = false,
-                    NewLinesForBracesInAnonymousMethods = false,
-                    NewLinesForBracesInControlBlocks = false,
-                    NewLinesForBracesInAnonymousTypes = false,
-                    NewLinesForBracesInObjectCollectionArrayInitializers = false,
-                    NewLinesForBracesInLambdaExpressionBody = false,
-
-                    NewLineForElse = false,
-                    NewLineForCatch = false,
-                    NewLineForFinally = false,
-                    NewLineForMembersInObjectInit = false,
-                    NewLineForMembersInAnonymousTypes = false,
-                    NewLineForClausesInQuery = false,
-                },
-            }
         })
 
         -- configure cpp server
