@@ -15,45 +15,46 @@ return {
             vim.lsp.inlay_hint.enable(bufnr, true)
 
             opts.desc = "Go to declaration"
-            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+            vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
             opts.desc = "Show LSP definitions"
-            vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+            vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
             opts.desc = "Show documentation for what is under cursor"
-            vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+            vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
             opts.desc = "Show LSP implementations"
-            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+            vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
 
             opts.desc = "Show signature help"
-            vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+            vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
 
             opts.desc = "Add lsp workspace folder"
-            vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+            vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, opts)
 
             opts.desc = "Remove lsp workspace folder"
-            vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+            vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, opts)
 
             opts.desc = "List lsp workspace folders"
-            vim.keymap.set('n', '<space>wl', function()
+            vim.keymap.set("n", "<space>wl", function()
                 print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
             end, opts)
 
             opts.desc = "Show LSP type definitions"
-            vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+            vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, opts)
 
             opts.desc = "Smart rename"
-            vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+            vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
 
             opts.desc = "See available code actions"
-            vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+            vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
 
             opts.desc = "Show LSP references"
-            vim.keymap.set('n', 'gr', function() require('telescope.builtin').lsp_references() end, opts)
-
-            opts.desc = "Use LSP to format"
-            vim.keymap.set('n', '<space>f', function()
-                vim.lsp.buf.format { async = true }
+            vim.keymap.set("n", "gr", function()
+                require("telescope.builtin").lsp_references()
             end, opts)
 
+            opts.desc = "Use LSP to format"
+            vim.keymap.set("n", "<space>f", function()
+                vim.lsp.buf.format({ async = true })
+            end, opts)
 
             -- opts.desc = "Show buffer diagnostics"
             -- keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
@@ -66,7 +67,6 @@ return {
 
             opts.desc = "Go to next diagnostic"
             keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
 
             opts.desc = "Restart LSP"
             keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
@@ -113,13 +113,13 @@ return {
             on_attach = on_attach,
             settings = {
                 tsserver_file_preferences = {
-                    includeInlayParameterNameHints = 'all',
+                    includeInlayParameterNameHints = "all",
                     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                     includeInlayFunctionParameterTypeHints = true,
                     includeInlayVariableTypeHints = true,
                     includeInlayVariableTypeHintsWhenTypeMatchesName = false,
                     includeInlayFunctionLikeReturnTypeHints = true,
-                }
+                },
             },
         })
 
@@ -190,9 +190,14 @@ return {
             filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
         })
 
-        -- configure omnisharp server
-        lspconfig["omnisharp"].setup({
-            cmd = { "Omnisharp" },
+        -- csharp language server
+        lspconfig["csharp_ls"].setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+        })
+
+        -- fsharp language server
+        lspconfig["fsharp_language_server"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
@@ -224,7 +229,7 @@ return {
                     ["ui.inlayhint.hints"] = {
                         compositeLiteralFields = true,
                         constantValues = true,
-                        parameterNames = true
+                        parameterNames = true,
                     },
                 },
                 hints = {
@@ -235,7 +240,7 @@ return {
                     functionTypeParameters = true,
                     parameterNames = true,
                     rangeVariableTypes = true,
-                }
+                },
             },
         })
 
@@ -264,7 +269,7 @@ return {
                     },
                     hint = {
                         enable = true,
-                    }
+                    },
                 },
             },
         })
