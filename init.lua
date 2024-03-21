@@ -1,5 +1,41 @@
 if vim.g.vscode then
-    return
+    local map = vim.keymap.set
+    local vscode = require("vscode-neovim")
+
+    map("n", "<C-j>", function()
+        vscode.call("workbench.action.navigateDown")
+    end, { silent = true })
+    map("n", "<C-k>", function()
+        vscode.call("workbench.action.navigateUp")
+    end, { silent = true })
+    map("n", "<C-h>", function()
+        vscode.call("workbench.action.navigateLeft")
+    end, { silent = true })
+    map("n", "<C-l>", function()
+        vscode.call("workbench.action.navigateRight")
+    end, { silent = true })
+
+    map({ "n", "v" }, "<Space>", function()
+        vscode.call("whichkey.show")
+    end, { silent = true })
+
+    map({ "n", "v" }, "gr", function()
+        vscode.call("editor.action.goToReferences")
+    end, { silent = true })
+    map({ "n", "v" }, "<Space>a", function()
+        vscode.call("editor.action.codeAction")
+    end, { silent = true })
+    map({ "n", "v" }, "<Space>r", function()
+        vscode.call("editor.action.rename")
+    end, { silent = true })
+    map({ "n", "v" }, "<Space>R", function()
+        vscode.call("workbench.action.reloadWindow")
+    end, { silent = true })
+
+    map("n", "mim", "vi(")
+    map("n", "miM", "vi{")
+    map("n", "gh", "g0")
+    map("n", "gl", "g$")
 end
 
 vim.g.base46_cache = vim.fn.stdpath("data") .. "/nvchad/base46/"
@@ -24,6 +60,7 @@ require("lazy").setup({
         lazy = false,
         branch = "v2.5",
         import = "nvchad.plugins",
+        cond = not vim.g.vscode,
         config = function()
             require("options")
         end,
@@ -33,10 +70,12 @@ require("lazy").setup({
 }, lazy_config)
 
 -- load theme
-dofile(vim.g.base46_cache .. "defaults")
-dofile(vim.g.base46_cache .. "statusline")
+if not vim.g.vscode then
+    dofile(vim.g.base46_cache .. "defaults")
+    dofile(vim.g.base46_cache .. "statusline")
 
-require("nvchad.autocmds")
+    require("nvchad.autocmds")
+end
 
 vim.schedule(function()
     require("mappings")

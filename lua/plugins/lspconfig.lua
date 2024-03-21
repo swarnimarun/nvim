@@ -1,5 +1,6 @@
 return {
     "neovim/nvim-lspconfig",
+    cond = not vim.g.vscode,
     event = { "VeryLazy", "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
