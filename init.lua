@@ -87,8 +87,8 @@ if not vim.g.vscode then
     dofile(vim.g.base46_cache .. "statusline")
 
     require("nvchad.autocmds")
-end
 
-vim.schedule(function()
-    require("mappings")
-end)
+    vim.schedule(function()
+        require("mappings")
+    end)
+end
