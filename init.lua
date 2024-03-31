@@ -31,7 +31,7 @@ if vim.g.vscode then
         vscode.call("editor.action.goToTypeDefinition")
     end, { silent = true })
 
-    map({ "n", "v" }, "<Space>", function()
+    map({ "n", "v" }, "<Space>w", function()
         vscode.call("whichkey.show")
     end, { silent = true })
     map({ "n", "v" }, "<Space>a", function()
