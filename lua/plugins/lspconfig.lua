@@ -13,7 +13,7 @@ return {
                 local opts = { noremap = true, silent = true }
                 -- set keybinds for the entire buffer
                 opts.buffer = bufnr
-                vim.lsp.inlay_hint.enable(bufnr, true)
+                vim.lsp.inlay_hint.enable(true)
 
                 opts.desc = "Go to declaration"
                 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)

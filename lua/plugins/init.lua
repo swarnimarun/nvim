@@ -11,20 +11,6 @@ return {
     },
 
     {
-        'akinsho/bufferline.nvim',
-        dependencies = 'nvim-tree/nvim-web-devicons',
-        config = function()
-            -- setup defaults
-            require('bufferline').setup({
-                options = {
-                    separator_style = "slope",
-                    buffer_close_icon = ' ',
-                },
-            })
-        end,
-    },
-
-    {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
