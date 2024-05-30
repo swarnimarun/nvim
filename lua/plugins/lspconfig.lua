@@ -13,7 +13,7 @@ return {
                 local opts = { noremap = true, silent = true }
                 -- set keybinds for the entire buffer
                 opts.buffer = bufnr
-                vim.lsp.inlay_hint.enable(true)
+                vim.lsp.inlay_hint.enable()
 
                 opts.desc = "Go to declaration"
                 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
@@ -274,7 +274,7 @@ return {
                 server = {
                     on_attach = function(_, bufnr)
                         -- you can also put keymaps in here
-                        vim.lsp.inlay_hint.enable(bufnr, true)
+                        vim.lsp.inlay_hint.enable()
                         vim.keymap.set(
                             "n",
                             "<leader>a",
@@ -316,7 +316,7 @@ return {
                 },
                 on_attach = function(_, bufnr)
                     vim.api.nvim_set_hl(0, 'LspInlayHint', { fg = '#6272A4', italic = true })
-                    vim.lsp.inlay_hint.enable(bufnr, true)
+                    vim.lsp.inlay_hint.enable()
                 end,
             })
         end
