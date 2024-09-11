@@ -48,3 +48,4 @@ require("lazy").setup("plugins", {
 
 -- keymap for only core neovim features
 require("core.keymap")
+require("lsp")
