@@ -217,6 +217,25 @@ return {
             lspconfig["gleam"].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
+                settings = {
+                    gleam = {
+                        format = true,
+                    },
+                },
+            })
+            -- configure zig language server
+            lspconfig["zls"].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                settings = {
+                    zls = {
+                        enable_inlay_hints = true,
+                        inlay_hints_show_builtin = true,
+                        inlay_hints_exclude_single_argument = true,
+                        inlay_hints_hide_redundant_param_names = true,
+                        inlay_hints_hide_redundant_param_names_last_token = true,
+                    }
+                }
             })
 
             -- configure go server
