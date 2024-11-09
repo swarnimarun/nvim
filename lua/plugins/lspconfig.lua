@@ -105,10 +105,18 @@ return {
             lspconfig["tsserver"].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
+                root_dir = lspconfig.util.root_pattern("package.json"),
+                single_file_support = false,
             })
 
             -- configure css server
             lspconfig["cssls"].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
+
+            -- configure swift server
+            lspconfig["sourcekit"].setup({
                 capabilities = capabilities,
                 on_attach = on_attach,
             })
@@ -261,6 +269,19 @@ return {
                 on_attach = on_attach,
             })
 
+            -- configure deno typescript server
+            lspconfig["denols"].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+            })
+
+            -- configure zig server
+            lspconfig["zls"].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+            })
+
             -- configure lua server (with special settings)
             lspconfig["lua_ls"].setup({
                 capabilities = capabilities,
@@ -314,31 +335,31 @@ return {
         end,
     },
     { "b0o/SchemaStore.nvim", version = false },
-    {
-        "pmizio/typescript-tools.nvim",
-        name = "typescript-tools",
-        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-        event = { "BufReadPost *.ts,*.tsx,*.js,*.jsx", "BufNewFile *.ts,*.tsx,*.js,*.jsx" },
-        opts = {},
-        config = function()
-            require("typescript-tools").setup({
-                settings = {
-                    tsserver_file_preferences = {
-                        includeInlayParameterNameHints = "all",
-                        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                        includeInlayFunctionParameterTypeHints = true,
-                        includeInlayVariableTypeHints = true,
-                        includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-                        includeInlayFunctionLikeReturnTypeHints = true,
-                    },
-                },
-                on_attach = function(_, bufnr)
-                    vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#6272A4", italic = true })
-                    vim.lsp.inlay_hint.enable(true)
-                end,
-            })
-        end,
-    },
+    -- {
+    --     "pmizio/typescript-tools.nvim",
+    --     name = "typescript-tools",
+    --     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    --     event = { "BufReadPost *.ts,*.tsx,*.js,*.jsx", "BufNewFile *.ts,*.tsx,*.js,*.jsx" },
+    --     opts = {},
+    --     config = function()
+    --         require("typescript-tools").setup({
+    --             settings = {
+    --                 tsserver_file_preferences = {
+    --                     includeInlayParameterNameHints = "all",
+    --                     includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+    --                     includeInlayFunctionParameterTypeHints = true,
+    --                     includeInlayVariableTypeHints = true,
+    --                     includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+    --                     includeInlayFunctionLikeReturnTypeHints = true,
+    --                 },
+    --             },
+    --             on_attach = function(_, bufnr)
+    --                 vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#6272A4", italic = true })
+    --                 vim.lsp.inlay_hint.enable(true)
+    --             end,
+    --         })
+    --     end,
+    -- },
     "ionide/Ionide-vim",
     "p00f/clangd_extensions.nvim",
 }
