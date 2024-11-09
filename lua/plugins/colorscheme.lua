@@ -1,18 +1,28 @@
 return {
+    {
+      "olimorris/onedarkpro.nvim",
+      priority = 1000, -- Ensure it loads first
+        config = function()
+            vim.cmd([[colorscheme onedark]])
+        end,
+    },
     -- {
     -- 	'kepano/flexoki-neovim',
     -- 	-- don't use name flexoki-neovim
     -- 	name = 'flexoki',
     -- 	priority = 1000,
+    --     config = function()
+    --         vim.cmd([[colorscheme flexoki-dark]])
+    --     end,
     -- },
-    {
-        "lunarvim/darkplus.nvim",
-        name = "darkplus",
-        priority = 1000,
-        config = function()
-            vim.cmd([[colorscheme darkplus]])
-        end,
-    },
+    -- {
+    --     "lunarvim/darkplus.nvim",
+    --     name = "darkplus",
+    --     priority = 1000,
+    --     config = function()
+    --         vim.cmd([[colorscheme darkplus]])
+    --     end,
+    -- },
     -- {
     -- 	'sainnhe/sonokai',
     -- 	priority = 1000,

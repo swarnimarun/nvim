@@ -15,11 +15,7 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             -- setup defaults
-            require('lualine').setup({
-                options = {
-                    theme = 'darkplus'
-                }
-            })
+            require('lualine').setup({})
         end,
     },
 
