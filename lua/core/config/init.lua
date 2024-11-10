@@ -20,3 +20,5 @@ vim.o.titlelen = 70
 
 vim.o.mouse = "a"
 vim.o.mousefocus = true
+
+vim.o.clipboard = "unnamedplus"
