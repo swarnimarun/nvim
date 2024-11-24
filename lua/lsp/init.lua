@@ -108,6 +108,14 @@ local on_attach_new = function(client, buf)
         vim.keymap.set('n', 'cx', vim.lsp.buf.code_action, opts)
     end
 
+    vim.keymap.set("n", "<leader>sf", function()
+        vim.lsp.buf.format({ async = true })
+    end, opts)
+
+    vim.api.nvim_create_user_command('LspFormat', function()
+        vim.lsp.buf.format({ async = true })
+    end, {})
+
     opts.desc = "Show line diagnostics"
     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
