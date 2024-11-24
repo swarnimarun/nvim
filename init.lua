@@ -1,3 +1,8 @@
+-- if vscode neovim extension
+if vim.g.vscode then
+    return
+end
+
 -- ---------------------------
 -- | Bootstrap
 -- ---------------------------
