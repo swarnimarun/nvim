@@ -1,4 +1,4 @@
-if vim.fn.executable('lua-language-server') == 1 then
+if vim.fn.executable('fsautocomplete') == 1 then
     vim.lsp.start({
         name = 'fsautocomplete',
         cmd = { 'fsautocomplete' },
