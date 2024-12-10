@@ -10,6 +10,19 @@ elseif vim.fn.executable('svelteserver') == 1 then
     vim.lsp.start({
         name = 'Svelte Language Server',
         cmd = { 'svelteserver', '--stdio' },
-        root_dir = vim.fs.dirname(vim.fs.find({ 'svelte.config.js', 'svelte.config.ts', 'package.json' }, { upward = true })[1]),
+        root_dir = vim.fs.dirname(vim.fs.find({ 'svelte.config.js', 'svelte.config.ts', 'package.json' },
+            { upward = true })[1]),
+        settings = {
+            typescript = {
+                inlayHints = {
+                    parameterNames = { enabled = "all" },
+                    parameterTypes = { enabled = true },
+                    variableTypes = { enabled = true },
+                    propertyDeclarationTypes = { enabled = true },
+                    functionLikeReturnTypes = { enabled = false },
+                    enumMemberValues = { enabled = true },
+                },
+            },
+        },
     })
 end
